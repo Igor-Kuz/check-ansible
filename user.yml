@@ -3,12 +3,14 @@
   hosts: demo
   tasks:
     - name: Create_user
+      vars:
+        user: firedemon
       user:
         name: "{{ user }}"
         state: present
       become: true
+      register: out
+    - debug:
+        var: out
 
-
-# вместо  ansible-playbook -i hosts.ini user.yml -K используем  ansible-playbook -i demo-server user.yml -K 
-# группа серверов, група переменных, и сам файл
-# extra_vars via  ansible-playbook -i demo-server user.yml -K --extra-vars "user=eagle"
+# ansible-playbook -i demo-server user.yml -K
