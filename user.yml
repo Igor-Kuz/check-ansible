@@ -2,21 +2,26 @@
 - name: user
   hosts: demo
   tasks:
-    - name: Create_user
-      vars:
-        user: firedemon
-      user:
-        name: "{{ user }}"
-        state: present
+    - name: Preconfig block
+      block:
+        - name: Create_user
+          vars:
+            user: firedemon
+          user:
+            name: "{{ user }}"
+            state: present
+          register: error
+        - name: Install curl
+          apt:
+            name: curl
+            update-cache: yes
+          register: error
       become: true
-      debugger: always
-
-# ansible-playbook -i demo-server user.yml -K
-# always, never, on_failed_on_unreachable, on_skipped
-# > p - print >p task / task.name / task.args
-# task.vars вывод указанных переменных task_vars -> all vars
-# p task_vars['inventory_hostname'] обращаемся к конкретной переменной для вывода
-# task.args['name']="myname2 "меняем имеющиеся аргументы
-# r -> retry current task
-# task.args['state']="absent" delete previous variable as in example -> name -> r 
-#q -> exit
+      rescue:
+        - name: Some error output
+          debug:
+            var: error
+      always:
+        - name: Reboot
+          debug:
+            msg: "Reboot!!!"
