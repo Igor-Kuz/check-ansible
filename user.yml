@@ -1,8 +1,8 @@
 ---
 - name: user
   hosts: demo
-  vars: 
-    user: igork
+  vars_files:
+    - ./my_vars.yml
   tasks:
     - name: Create_user
       user:
