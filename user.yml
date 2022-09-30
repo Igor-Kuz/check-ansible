@@ -9,4 +9,5 @@
       become: true
 
 
-# вместо  ansible-playbook -i hosts.ini user.yml -K используем  ansible-playbook -i demo-server user.yml -K
+# вместо  ansible-playbook -i hosts.ini user.yml -K используем  ansible-playbook -i demo-server user.yml -K 
+# группа серверов, група переменных, и сам файл
