@@ -7,3 +7,6 @@
         name: "{{ user }}"
         state: present
       become: true
+
+
+# вместо  ansible-playbook -i hosts.ini user.yml -K используем  ansible-playbook -i demo-server user.yml -K
