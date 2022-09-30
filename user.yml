@@ -1,10 +1,10 @@
 ---
 - name: user
   hosts: demo
+  vars: 
+    user: igork
   tasks:
     - name: Create_user
-      vars: 
-        user: igork
       user:
         name: "{{ user }}"
         state: present
