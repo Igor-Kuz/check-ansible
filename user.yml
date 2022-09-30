@@ -2,8 +2,10 @@
 - name: user
   hosts: demo
   tasks:
-    - name: Create user
+    - name: Create_user
+      vars: 
+        user: igork
       user:
-        name: igork
+        name: "{{ user }}"
         state: present
       become: true
